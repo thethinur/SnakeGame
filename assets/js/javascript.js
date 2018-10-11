@@ -1,15 +1,5 @@
 // Copyright 2018 Thinur Geir Torsson, Benjamin Badstue.
 // Snake game snake.js
-function createGame() {
-  setTimeout( function() {
-    GameArea.create();
-    setInterval(function() {
-      if (snake.won()) { return; }
-      snake.move();
-      snake.checkCollisions();
-    }, snake.movementspeed);
-  }, 1000);
-}
 // Regular global vars
 sprites = new Image();
 partnames = ['Head','Body','Tail1','Tail2'];
@@ -24,8 +14,13 @@ var GameArea = {
     width : 24
   },
   preload : function() {
+    sprites.onload = function() {
+      ui.startscreen.image.onload = sprites.onload = function() {
+        GameArea.create();
+      }
+      ui.startscreen.image.src = "assets/gamedata/startscreen.png";
+    }
     sprites.src = "assets/gamedata/sprites/sprites.png";
-    ui.startscreen.image.src = "assets/gamedata/startscreen.png"
   },
   create : function() {
     this.canvas.width = this.tiles.size * this.tiles.width * 2;
@@ -44,6 +39,11 @@ var GameArea = {
     var g = setInterval(function() {
       GameArea.updateGraphics();
     }, (1000/30));
+    setInterval(function() {
+      if (snake.won()) { return; }
+      snake.move();
+      snake.checkCollisions();
+    }, snake.movementspeed);
   },
   start : function() {
 
@@ -446,7 +446,6 @@ var food = {
 
 $(document).ready(function() {
   GameArea.preload();
-  createGame();
   // document.body.insertBefore(sprites, document.body.childNodes[0]);
   // document.body.insertBefore(ui.startscreen.image, document.body.childNodes[0])
   var keyhandler = $( document ).keydown(function( e ) {
