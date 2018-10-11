@@ -17,6 +17,14 @@ var GameArea = {
     sprites.onload = function() {
       ui.startscreen.image.onload = sprites.onload = function() {
         GameArea.create();
+        var g = setInterval(function() {
+          GameArea.updateGraphics();
+        }, (1000/30));
+        setInterval(function() {
+          if (snake.won()) { return; }
+          snake.move();
+          snake.checkCollisions();
+        }, snake.movementspeed);
       }
       ui.startscreen.image.src = "assets/gamedata/startscreen.png";
     }
@@ -36,14 +44,6 @@ var GameArea = {
     ui.scorecounter.location.y = this.canvas.height - 50;
     score.reset();
     snake.create([{x : 0, y : 4},{x : 0, y : 0},{x : 4, y : 0}]);
-    var g = setInterval(function() {
-      GameArea.updateGraphics();
-    }, (1000/30));
-    setInterval(function() {
-      if (snake.won()) { return; }
-      snake.move();
-      snake.checkCollisions();
-    }, snake.movementspeed);
   },
   start : function() {
 
