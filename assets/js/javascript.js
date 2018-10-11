@@ -446,8 +446,8 @@ var food = {
 
 $(document).ready(function() {
   GameArea.preload();
-  // document.body.insertBefore(sprites, document.body.childNodes[0]);
-  // document.body.insertBefore(ui.startscreen.image, document.body.childNodes[0])
+  document.body.insertBefore(sprites, document.body.childNodes[0]);
+  document.body.insertBefore(ui.startscreen.image, document.body.childNodes[0])
   var keyhandler = $( document ).keydown(function( e ) {
     key = e.which;
     switch (key) {
