@@ -11,3 +11,10 @@ canvas {
   margin: auto;
   padding-top: 30px;
 }
+div {
+  background-color: #ff6633;
+  position: sticky;
+  top: calc(100vh - 10px);
+  bottom: 0;
+  padding: 3px;
+}
