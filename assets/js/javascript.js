@@ -430,7 +430,9 @@ var score = {
   current : 0,
   add : function(n) {
     this.current += n;
-    if (this.current > this.best) { this.best = this.current; }
+    if (this.current > this.best) {
+      this.best = this.current;
+    }
   },
   reset : function() {
     this.current = 0;
@@ -463,9 +465,23 @@ var food = {
   },
 };
 
-
-
 $(document).ready(function() {
+  var decodedcookie = decodeURIComponent(document.cookie) + ";";
+  if (decodedcookie.indexOf("score=") > -1) {
+    var varindex = decodedcookie.indexOf("score=") + 6;
+    var end = decodedcookie.indexOf(';', varindex);
+    score.best = parseInt(decodedcookie.substring(varindex, end));
+  }
+  $( window ).on("unload", function() {
+    // Build the expiration date string:
+    var expiration_date = new Date();
+    var cookie_string = '';
+    expiration_date.setFullYear(expiration_date.getFullYear() + 1);
+    // Build the set-cookie string:
+    cookie_string = "score=" + score.best + "; path=/; expires=" + expiration_date.toUTCString();
+    // Create or update the cookie:
+    document.cookie = cookie_string;
+  });
   GameArea.preload();
   //document.body.insertBefore(sprites, document.body.childNodes[0]);
   //document.body.insertBefore(ui.startscreen.image, document.body.childNodes[0])
