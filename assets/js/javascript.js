@@ -497,7 +497,7 @@ $(document).ready(function() {
         return;
       }
       snake.moving = true;
-      snake.movqueue = push([0, -1]);
+      snake.movqueue.push([0, -1]);
       ui.startscreen.active = false;
       return;
     case 65:
@@ -508,7 +508,7 @@ $(document).ready(function() {
         return;
       }
       snake.moving = true;
-      snake.movqueue = push([-1, 0]);
+      snake.movqueue.push([-1, 0]);
       ui.startscreen.active = false;
       return;
     case 83:
@@ -519,7 +519,7 @@ $(document).ready(function() {
         return;
       }
       snake.moving = true;
-      snake.movqueue = push([0, 1]);
+      snake.movqueue.push([0, 1]);
       ui.startscreen.active = false;
       return;
     case 68:
@@ -530,7 +530,7 @@ $(document).ready(function() {
         return;
       }
       snake.moving = true;
-      snake.movqueue = push([1, 0]);
+      snake.movqueue.push([1, 0]);
       ui.startscreen.active = false;
       return;
     };
