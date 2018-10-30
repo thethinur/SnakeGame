@@ -91,8 +91,8 @@ var background = {
     this.context = this.canvas.getContext("2d");
   },
   generate : function() {
-    for(let x = 0; x < GameArea.tiles.height; x++){
-      for(let y = 0; y < GameArea.tiles.width; y++){
+    for (let x = 0; x < GameArea.tiles.height; x++){
+      for (let y = 0; y < GameArea.tiles.width; y++){
         let sid = Math.floor(Math.random() * 3);
         let xid = (sid * 16) % 128;
         let yid = 16 * Math.floor((sid * 16) / 128);
@@ -135,7 +135,7 @@ var ui = {
   }
 }
 function checktype(name) {
-  for(let x = 0, l = partnames.length; 0 < l; x++){
+  for (let x = 0, l = partnames.length; 0 < l; x++){
     if (name === partnames[x]){
       return x;
     }
@@ -175,7 +175,8 @@ var snake = {
   tail : undefined, // The tail/last entry/node in the linked list
   movementspeed : 160, // ms between each move.
   direction : [0, 0], // Active direction vector
-  newdirection : [0, 0], // Next direction vector
+  movqueue : [], // Next direction vector
+  moving : false, // Movement bool for pausing
   // Function to build the snake
   create : function(coords) {
     //ensure that an array of objects is what comes through
@@ -327,8 +328,8 @@ var snake = {
   },
   move : function(){
     // check for movement
-    if (!(this.newdirection[0] === 0 && this.newdirection[1] === 0)){
-      this.direction = this.newdirection;
+    if (this.moving){
+      if (this.movqueue.length > 0) this.direction = this.queue.shift();
       let node;
       if (this.length > this.nodes){
         this.nodes++;
@@ -342,7 +343,7 @@ var snake = {
         if (node.coords.x < 0){
           node.coords.x = GameArea.tiles.width - 1;
         }
-        else if(node.coords.y < 0){
+        else if (node.coords.y < 0){
           node.coords.y = GameArea.tiles.height - 1;
         }
         if (this.direction[0] < 0){
@@ -380,7 +381,7 @@ var snake = {
       if (node.coords.x < 0){
         node.coords.x = GameArea.tiles.width - 1;
       }
-      else if(node.coords.y < 0){
+      else if (node.coords.y < 0){
         node.coords.y = GameArea.tiles.height - 1;
       }
       if (this.direction[0] < 0){
@@ -489,29 +490,49 @@ $(document).ready(function() {
     key = e.which;
     switch (key) {
     case 87:
-      if (snake.direction[1] !== 1) {
-        snake.newdirection = [0, -1];
-        ui.startscreen.active = false;
+      if (snake.movqueue.length === 0 && snake.direction[1] === 1) {
+        return;
       }
-      break;
+      else (snake.movqueue[snake.movqueue.lenght - 1][1] === 1){
+        return;
+      }
+      snake.moving = true;
+      snake.movqueue = push([0, -1]);
+      ui.startscreen.active = false;
+      return;
     case 65:
-      if (snake.direction[0] !== 1) {
-        snake.newdirection = [-1, 0];
-        ui.startscreen.active = false;
+      if (snake.movqueue.length === 0 && snake.direction[0] === 1) {
+        return;
       }
-      break;
+      else (snake.movqueue[snake.movqueue.lenght - 1][0] === 1){
+        return;
+      }
+      snake.moving = true;
+      snake.movqueue = push([-1, 0]);
+      ui.startscreen.active = false;
+      return;
     case 83:
-      if (snake.direction[1] !== -1) {
-        snake.newdirection = [0, 1];
-        ui.startscreen.active = false;
+      if (snake.movqueue.length === 0 && snake.direction[1] === -1) {
+        return;
       }
-      break;
+      else (snake.movqueue[snake.movqueue.lenght - 1][1] === -1){
+        return;
+      }
+      snake.moving = true;
+      snake.movqueue = push([0, 1]);
+      ui.startscreen.active = false;
+      return;
     case 68:
-      if (snake.direction[0] !== -1) {
-        snake.newdirection = [1, 0];
-        ui.startscreen.active = false;
+      if (snake.movqueue.length === 0 && snake.direction[0] === -1) {
+        return;
       }
-      break;
+      else (snake.movqueue[snake.movqueue.lenght - 1][0] === -1){
+        return;
+      }
+      snake.moving = true;
+      snake.movqueue = push([1, 0]);
+      ui.startscreen.active = false;
+      return;
     };
   });
 
