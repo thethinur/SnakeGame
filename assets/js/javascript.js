@@ -329,7 +329,7 @@ var snake = {
   move : function(){
     // check for movement
     if (this.moving){
-      if (this.movqueue.length > 0) this.direction = this.queue.shift();
+      if (this.movqueue.length > 0) this.direction = this.movqueue.shift();
       let node;
       if (this.length > this.nodes){
         this.nodes++;
