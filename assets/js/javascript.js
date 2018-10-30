@@ -175,7 +175,7 @@ var snake = {
   tail : undefined, // The tail/last entry/node in the linked list
   movementspeed : 160, // ms between each move.
   direction : [0, 0], // Active direction vector
-  movqueue : [], // Next direction vector
+  movqueue : new Array(), // Next direction vector
   moving : false, // Movement bool for pausing
   // Function to build the snake
   create : function(coords) {
@@ -490,8 +490,8 @@ $(document).ready(function() {
     key = e.which;
     switch (key) {
     case 87:
-      if (!(snake.movqueue.length > 0) && snake.direction[1] === 1) {
-        return;
+      if (snake.movqueue.length = 0) {
+        if (snake.direction[1] === 1) return;
       }
       else if (snake.movqueue[snake.movqueue.lenght - 1][1] === 1){
         return;
@@ -501,8 +501,8 @@ $(document).ready(function() {
       ui.startscreen.active = false;
       return;
     case 65:
-      if (!(snake.movqueue.length > 0) && snake.direction[0] === 1) {
-        return;
+      if (snake.movqueue.length = 0) {
+        if (snake.direction[0] === 1) return;
       }
       else if (snake.movqueue[snake.movqueue.lenght - 1][0] === 1) {
         return;
@@ -512,8 +512,8 @@ $(document).ready(function() {
       ui.startscreen.active = false;
       return;
     case 83:
-      if (!(snake.movqueue.length > 0) && snake.direction[1] === -1) {
-        return;
+      if (snake.movqueue.length = 0) {
+        if (snake.direction[1] === -1) return;
       }
       else if (snake.movqueue[snake.movqueue.lenght - 1][1] === -1) {
         return;
@@ -523,8 +523,8 @@ $(document).ready(function() {
       ui.startscreen.active = false;
       return;
     case 68:
-      if (!(snake.movqueue.length > 0) && snake.direction[0] === -1) {
-        return;
+      if (snake.movqueue.length = 0) {
+        if (snake.direction[0] === -1) return;
       }
       else if (snake.movqueue[snake.movqueue.lenght - 1][0] === -1) {
         return;
