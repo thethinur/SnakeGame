@@ -195,7 +195,7 @@ var snake = {
       return;
     }
     //Reset values
-    this.newdirection = [0, 0];
+    this.moving = false;
     this.length = 1;
     this.nodes = 1;
     // Building Snake start
