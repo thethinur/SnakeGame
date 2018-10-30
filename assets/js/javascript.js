@@ -490,7 +490,7 @@ $(document).ready(function() {
     key = e.which;
     switch (key) {
     case 87:
-      if (snake.movqueue.length === 0 && snake.direction[1] === 1) {
+      if (!(snake.movqueue.length > 0) && snake.direction[1] === 1) {
         return;
       }
       else if (snake.movqueue[snake.movqueue.lenght - 1][1] === 1){
@@ -501,7 +501,7 @@ $(document).ready(function() {
       ui.startscreen.active = false;
       return;
     case 65:
-      if (snake.movqueue.length === 0 && snake.direction[0] === 1) {
+      if (!(snake.movqueue.length > 0) && snake.direction[0] === 1) {
         return;
       }
       else if (snake.movqueue[snake.movqueue.lenght - 1][0] === 1) {
@@ -512,7 +512,7 @@ $(document).ready(function() {
       ui.startscreen.active = false;
       return;
     case 83:
-      if (snake.movqueue.length === 0 && snake.direction[1] === -1) {
+      if (!(snake.movqueue.length > 0) && snake.direction[1] === -1) {
         return;
       }
       else if (snake.movqueue[snake.movqueue.lenght - 1][1] === -1) {
@@ -523,7 +523,7 @@ $(document).ready(function() {
       ui.startscreen.active = false;
       return;
     case 68:
-      if (snake.movqueue.length === 0 && snake.direction[0] === -1) {
+      if (!(snake.movqueue.length > 0) && snake.direction[0] === -1) {
         return;
       }
       else if (snake.movqueue[snake.movqueue.lenght - 1][0] === -1) {
