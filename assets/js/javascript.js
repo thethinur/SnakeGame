@@ -504,7 +504,7 @@ $(document).ready(function() {
       if (snake.movqueue.length === 0 && snake.direction[0] === 1) {
         return;
       }
-      else (snake.movqueue[snake.movqueue.lenght - 1][0] === 1){
+      else (snake.movqueue[snake.movqueue.lenght - 1][0] === 1) {
         return;
       }
       snake.moving = true;
@@ -515,7 +515,7 @@ $(document).ready(function() {
       if (snake.movqueue.length === 0 && snake.direction[1] === -1) {
         return;
       }
-      else (snake.movqueue[snake.movqueue.lenght - 1][1] === -1){
+      else (snake.movqueue[snake.movqueue.lenght - 1][1] === -1) {
         return;
       }
       snake.moving = true;
@@ -526,7 +526,7 @@ $(document).ready(function() {
       if (snake.movqueue.length === 0 && snake.direction[0] === -1) {
         return;
       }
-      else (snake.movqueue[snake.movqueue.lenght - 1][0] === -1){
+      else (snake.movqueue[snake.movqueue.lenght - 1][0] === -1) {
         return;
       }
       snake.moving = true;
